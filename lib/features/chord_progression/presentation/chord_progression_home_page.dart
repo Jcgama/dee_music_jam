@@ -7,19 +7,12 @@ class ChordProgressionHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Chord Progression',
-          style: TextStyle(color: Color(0xFFFFD54F)),
-        ),
-        backgroundColor: const Color(0xFF121212),
+        title: const Text('Chord Progression'),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
           'Chord Progression',
-          style: TextStyle(
-            color: Color(0xFFFFD54F),
-            fontSize: 24,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
     );
