@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Guitar Practice')),
+      appBar: AppBar(title: const Text('Dee, your guitar helper')),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         children: [
