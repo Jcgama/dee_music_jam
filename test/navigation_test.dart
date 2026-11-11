@@ -1,6 +1,10 @@
+import 'package:dee_music_jam/core/router/app_router.dart';
+import 'package:dee_music_jam/features/chord_progression/domain/major_key.dart';
+import 'package:dee_music_jam/features/chord_progression/presentation/widgets/major_key_tile.dart';
 import 'package:dee_music_jam/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   testWidgets('opens chord progression and returns to the home page', (
@@ -13,12 +17,42 @@ void main() {
 
     expect(find.text('Major keys'), findsOneWidget);
     expect(find.byKey(const ValueKey('major-key-G')), findsOneWidget);
-    expect(find.text('Guitar Practice'), findsNothing);
+    expect(find.text('Dee, your guitar helper'), findsNothing);
 
     await tester.pageBack();
     await tester.pumpAndSettle();
 
-    expect(find.text('Guitar Practice'), findsOneWidget);
+    expect(find.text('Dee, your guitar helper'), findsOneWidget);
+  });
+
+  testWidgets('keeps reserved URL characters when navigating to a key detail', (
+    tester,
+  ) async {
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const Scaffold(
+            body: MajorKeyTile(
+              keyData: MajorKey(name: 'F#', isAvailable: true),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: AppRouter.harmonicFieldPath,
+          builder: (context, state) => Scaffold(
+            appBar: AppBar(title: Text('${Uri.decodeComponent(state.pathParameters['key'] ?? '')} Major')),
+          ),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+
+    await tester.tap(find.text('F#'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('F# Major'), findsOneWidget);
   });
 
   testWidgets('shows all major keys and opens the G harmonic field', (
