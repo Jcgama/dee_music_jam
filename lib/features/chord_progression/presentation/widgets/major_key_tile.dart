@@ -30,9 +30,7 @@ class MajorKeyTile extends StatelessWidget {
         child: OutlinedButton(
           key: ValueKey('major-key-${keyData.name}'),
           onPressed: isAvailable
-              ? () => context.push(
-                  '${AppRouter.chordProgressionPath}/${keyData.name}',
-                )
+              ? () => context.push(AppRouter.keyPath(keyData.name))
               : null,
           style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(

@@ -8,6 +8,9 @@ class AppRouter {
   static const chordProgressionPath = '/chord-progression';
   static const harmonicFieldPath = '$chordProgressionPath/:key';
 
+  static String keyPath(String keyName) =>
+      '$chordProgressionPath/${Uri.encodeComponent(keyName)}';
+
   static final GoRouter router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const MainPage()),
@@ -18,7 +21,7 @@ class AppRouter {
       GoRoute(
         path: harmonicFieldPath,
         builder: (context, state) =>
-            HarmonicFieldPage(keyName: state.pathParameters['key']!),
+            HarmonicFieldPage(keyName: state.pathParameters['key'] ?? ''),
       ),
     ],
   );
