@@ -33,15 +33,17 @@ void main() {
         GoRoute(
           path: '/',
           builder: (context, state) => const Scaffold(
-            body: MajorKeyTile(
-              keyData: MajorKey(name: 'F#', isAvailable: true),
-            ),
+            body: MajorKeyTile(keyData: MajorKey(name: 'F#')),
           ),
         ),
         GoRoute(
           path: AppRouter.harmonicFieldPath,
           builder: (context, state) => Scaffold(
-            appBar: AppBar(title: Text('${Uri.decodeComponent(state.pathParameters['key'] ?? '')} Major')),
+            appBar: AppBar(
+              title: Text(
+                '${Uri.decodeComponent(state.pathParameters['key'] ?? '')} Major',
+              ),
+            ),
           ),
         ),
       ],
@@ -55,9 +57,7 @@ void main() {
     expect(find.text('F# Major'), findsOneWidget);
   });
 
-  testWidgets('shows all major keys and opens the G harmonic field', (
-    tester,
-  ) async {
+  testWidgets('shows all major keys and opens harmonic fields', (tester) async {
     await tester.pumpWidget(const MainApp());
     await tester.tap(find.text('Chord Progression'));
     await tester.pumpAndSettle();
@@ -79,20 +79,16 @@ void main() {
       expect(find.byKey(ValueKey('major-key-$keyName')), findsOneWidget);
     }
 
-    final unavailableKey = find.byKey(const ValueKey('major-key-C'));
-    expect(tester.widget<OutlinedButton>(unavailableKey).onPressed, isNull);
-    final unavailableOpacity = find.ancestor(
-      of: unavailableKey,
-      matching: find.byType(Opacity),
-    );
-    expect(tester.widget<Opacity>(unavailableOpacity.first).opacity, 0.4);
-    expect(find.text('Available'), findsNothing);
+    final cMajorKey = find.byKey(const ValueKey('major-key-C'));
+    expect(tester.widget<OutlinedButton>(cMajorKey).onPressed, isNotNull);
 
-    await tester.tap(unavailableKey);
+    await tester.tap(cMajorKey);
     await tester.pumpAndSettle();
-    expect(find.text('C major is not available yet.'), findsOneWidget);
-    expect(tester.widget<OutlinedButton>(unavailableKey).onPressed, isNull);
+    expect(find.text('C Major'), findsOneWidget);
+    expect(find.text('Bdim'), findsOneWidget);
 
+    await tester.pageBack();
+    await tester.pumpAndSettle();
     final gMajorKey = find.byKey(const ValueKey('major-key-G'));
     await tester.drag(find.byType(ListView), const Offset(0, -400));
     await tester.pumpAndSettle();

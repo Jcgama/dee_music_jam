@@ -2,18 +2,18 @@ import '../domain/major_key.dart';
 
 class MajorKeyRepository {
   static const _majorKeys = [
-    MajorKey(name: 'C', isAvailable: false),
-    MajorKey(name: 'Db', isAvailable: false),
-    MajorKey(name: 'D', isAvailable: false),
-    MajorKey(name: 'Eb', isAvailable: false),
-    MajorKey(name: 'E', isAvailable: false),
-    MajorKey(name: 'F', isAvailable: false),
-    MajorKey(name: 'F#', isAvailable: false),
-    MajorKey(name: 'G', isAvailable: true),
-    MajorKey(name: 'Ab', isAvailable: false),
-    MajorKey(name: 'A', isAvailable: false),
-    MajorKey(name: 'Bb', isAvailable: false),
-    MajorKey(name: 'B', isAvailable: false),
+    MajorKey(name: 'C'),
+    MajorKey(name: 'Db'),
+    MajorKey(name: 'D'),
+    MajorKey(name: 'Eb'),
+    MajorKey(name: 'E'),
+    MajorKey(name: 'F'),
+    MajorKey(name: 'F#'),
+    MajorKey(name: 'G'),
+    MajorKey(name: 'Ab'),
+    MajorKey(name: 'A'),
+    MajorKey(name: 'Bb'),
+    MajorKey(name: 'B'),
   ];
 
   List<MajorKey> getMajorKeys() => _majorKeys;
