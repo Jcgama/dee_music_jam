@@ -2,7 +2,7 @@ import 'package:dee_music_jam/core/router/app_router.dart';
 import 'package:dee_music_jam/features/chord_progression/domain/major_key.dart';
 import 'package:dee_music_jam/features/chord_progression/presentation/widgets/major_key_tile.dart';
 import 'package:dee_music_jam/main.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 

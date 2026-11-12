@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../domain/harmonic_field.dart';
 import 'harmonic_chord_tile.dart';
