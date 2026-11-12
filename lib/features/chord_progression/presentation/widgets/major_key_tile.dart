@@ -12,49 +12,20 @@ class MajorKeyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isAvailable = keyData.isAvailable;
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: isAvailable
-          ? null
-          : () => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('${keyData.name} major is not available yet.'),
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 2),
-              ),
-            ),
-      child: Opacity(
-        opacity: isAvailable ? 1 : 0.4,
-        child: OutlinedButton(
-          key: ValueKey('major-key-${keyData.name}'),
-          onPressed: isAvailable
-              ? () => context.push(AppRouter.keyPath(keyData.name))
-              : null,
-          style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            side: BorderSide(
-              color: isAvailable
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.outlineVariant,
-            ),
-            backgroundColor: isAvailable
-                ? theme.colorScheme.primaryContainer
-                : null,
-          ),
-          child: Center(
-            child: Text(
-              keyData.name,
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: isAvailable
-                    ? theme.colorScheme.onPrimaryContainer
-                    : theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
+    return OutlinedButton(
+      key: ValueKey('major-key-${keyData.name}'),
+      onPressed: () => context.push(AppRouter.keyPath(keyData.name)),
+      style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        side: BorderSide(color: theme.colorScheme.primary),
+      ),
+      child: Center(
+        child: Text(
+          keyData.name,
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: theme.colorScheme.onPrimaryContainer,
           ),
         ),
       ),

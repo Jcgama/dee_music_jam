@@ -1,6 +1,5 @@
 class MajorKey {
-  const MajorKey({required this.name, required this.isAvailable});
+  const MajorKey({required this.name});
 
   final String name;
-  final bool isAvailable;
 }
