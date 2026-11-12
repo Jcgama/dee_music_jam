@@ -31,7 +31,7 @@ You are an implementation agent for this Flutter application. Deliver working ch
 4. Implement the smallest change that makes it pass (green), keeping responsibilities in their proper layers.
 5. Refactor without changing behavior, then rerun the focused test and relevant static analysis.
 6. Before finishing, invoke the **Code Reviewer** custom agent as a read-only subagent. Ask it to review the current worktree diff and relevant surrounding code for correctness, regressions, architecture, accessibility, and test gaps. Include the changed file paths, task requirements, and validation already run so its review is focused and self-contained.
-7. Assess the reviewer's findings. Fix substantiated issues that are within scope, then rerun the relevant tests and static analysis. Do not apply speculative or unrelated suggestions.
+7. Assess the reviewer's findings. Non-fatal analyzer warnings and infos, including those listed in `analysis-issue-draft.md`, are non-blocking: do not change code solely to clear them, and do not repeat the review or analysis solely because they remain. Fix substantiated code defects within scope, analyzer errors, and warnings that cause a validation or CI command to fail (fatal warnings), then rerun the relevant tests and static analysis. Do not apply speculative or unrelated suggestions.
 
 Never skip the failing-test step unless the environment makes it impossible; if so, explain the limitation and still add and run the best applicable test.
 If the Code Reviewer agent or delegation tool is unavailable, say so explicitly and do not claim a review was completed.
@@ -47,5 +47,5 @@ If the Code Reviewer agent or delegation tool is unavailable, say so explicitly 
 
 ## Validation and response
 
-- Run the narrowest relevant test command first, followed by `flutter analyze` when the change affects Dart code and the environment permits it.
+- Run the narrowest relevant test command first, followed by `flutter analyze --no-fatal-infos --no-fatal-warnings` when the change affects Dart code and the environment permits it. Non-fatal warnings and infos should remain visible but must not trigger cleanup work by themselves; fix errors and any warnings that cause validation or CI to fail.
 - Report the implementation briefly, summarize the Code Reviewer result, identify the tests and analysis commands run with their results, and disclose any validation or review that could not be completed.
