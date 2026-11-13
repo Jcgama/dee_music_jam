@@ -13,3 +13,10 @@ Dee, for now, has chord progression for each major key
 
 More features are on the way!
 
+## Code coverage
+
+Pull request CI runs the test suite with coverage and compares line coverage for
+`lib/features/` against the base branch. A pull request cannot pass this check
+if its feature coverage decreases. Run `flutter test --coverage` locally to
+generate `coverage/lcov.info`.
+
